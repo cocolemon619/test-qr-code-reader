@@ -17,13 +17,15 @@
     "eslint-config-next": "15.1.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.7.3"
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",
+    "html5-qrcode": "^2.3.8",
     "next": "^15.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-qr-scanner": "^1.0.0-alpha.11"
+    "react-qr-scanner": "^1.0.0-alpha.11",
+    "react-select": "^5.9.0"
   }
 }

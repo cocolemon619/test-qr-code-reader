@@ -1,12 +1,36 @@
-import Image from "next/image";
-import QRCodeReader from "@/components/QrCodeReader";
+"use client";
 
-export default function Home() {
+// Page.tsx
+import React from 'react';
+import QrCodeReader from '@/components/QrCodeReader';  // インポートパスを確認してください
+
+const Page: React.FC = () => {
+  // スキャン成功時の処理
+  const handleScanSuccess = (scanData: string) => {
+    console.log('スキャン成功:', scanData);
+  };
+
+  // スキャン失敗時の処理
+  const handleScanFailure = (error: Error) => {
+    // エラーメッセージをログに出力するが、エラーとしては扱わない
+    console.warn('スキャン失敗:', error.message);  // console.errorではなくconsole.warnで警告として出力
+  };
+
+
   return (
     <>
-      <h1>QR Code Reader</h1>
-      <QRCodeReader />
-      <Image src="/qr-code.png" width={300} height={300} alt="QR Code" />
+      <h1>QRコードリーダー</h1>
+      {/* QRCodeReader コンポーネントに必要なプロパティを渡す */}
+      <QrCodeReader
+        onScanSuccess={handleScanSuccess}
+        onScanFailure={(error: string) => {
+          // ここで文字列として処理
+          console.warn('スキャン失敗:', error);
+        }}
+      />
     </>
   );
-}
+};
+
+export default Page;
+

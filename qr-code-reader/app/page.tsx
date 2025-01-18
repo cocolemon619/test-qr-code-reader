@@ -12,19 +12,23 @@ const Page: React.FC = () => {
     // スキャンしたデータがURLであれば、そのURLにリダイレクト
     try {
       const url = new URL(scanData);  // URLとして解析できるか試す
-      window.location.href = url.toString();  // URLに遷移
-    } catch (e) {
+      // window.location.href = url.toString();  // URLに遷移
+  
+      // APIへPOSTリクエストを送信
+      fetch('/api/log', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',  // 正しいContent-Typeを指定
+        },
+        body: JSON.stringify({ url: scanData }),  // URLをJSONとして送信
+      })
+        .then(response => response.json())
+        .then(data => console.log('APIからのレスポンス:', data))
+        .catch(error => console.error('APIリクエストエラー:', error));
+    } catch {
       console.error('スキャンしたデータがURLではありません:', scanData);
     }
   };
-  
-
-  // スキャン失敗時の処理
-  const handleScanFailure = (error: Error) => {
-    // エラーメッセージをログに出力するが、エラーとしては扱わない
-    console.warn('スキャン失敗:', error.message);  // console.errorではなくconsole.warnで警告として出力
-  };
-
 
   return (
     <>

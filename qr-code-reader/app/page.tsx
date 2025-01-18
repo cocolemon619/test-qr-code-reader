@@ -8,7 +8,16 @@ const Page: React.FC = () => {
   // スキャン成功時の処理
   const handleScanSuccess = (scanData: string) => {
     console.log('スキャン成功:', scanData);
+  
+    // スキャンしたデータがURLであれば、そのURLにリダイレクト
+    try {
+      const url = new URL(scanData);  // URLとして解析できるか試す
+      window.location.href = url.toString();  // URLに遷移
+    } catch (e) {
+      console.error('スキャンしたデータがURLではありません:', scanData);
+    }
   };
+  
 
   // スキャン失敗時の処理
   const handleScanFailure = (error: Error) => {
